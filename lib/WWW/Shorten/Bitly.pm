@@ -1,6 +1,6 @@
-# $Id: Bitly.pm 77 2009-01-25 14:07:16Z pankaj $
+# $Id: Bitly.pm 78 2009-01-25 14:48:37Z pankaj $
 # $Author: pankaj $
-# $Date: 2009-01-25 19:37:16 +0530 (Sun, 25 Jan 2009) $
+# $Date: 2009-01-25 20:18:37 +0530 (Sun, 25 Jan 2009) $
 # Author: <a href=mailto:perl@teknatus.com>Pankaj Jain</a>
 ################################################################################################################################
 package WWW::Shorten::Bitly;
@@ -30,12 +30,12 @@ WWW::Shorten::Bitly - Interface to shortening URLs using L<http:://bit.ly>
 
 =head1 VERSION
 
-$Revision: 77 $
+$Revision: 78 $
 
 =cut
 
 BEGIN {
-    our $VERSION = do { my @r = (0,q$Revision: 77 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
+    our $VERSION = do { my @r = (0,q$Revision: 78 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
     $WWW::Shorten::Bitly::VERBOSITY = 2;
 }
 
