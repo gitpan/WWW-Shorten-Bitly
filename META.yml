@@ -1,15 +1,18 @@
 --- #YAML:1.0
 name:               WWW-Shorten-Bitly
-version:            0.78
-abstract:           Interface to shortening URLs using L<http:://bit.ly>
+version:            0.93
+abstract:           Interface to shortening URLs using L<http://bit.ly>
 author:
-    - Pankaj Jain <perl@teknatus.com>
+    - Pankaj Jain <pjain@cpan.org>
 license:            perl
 distribution_type:  module
 configure_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    Test::More:  0
+    JSON::Any:     1.18
+    Test::More:    0
+    WWW::Shorten:  1.9
+    XML::Simple:   2.18
 no_index:
     directory:
         - t

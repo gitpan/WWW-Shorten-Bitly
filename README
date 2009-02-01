@@ -4,7 +4,8 @@ WWW::Shorten::Bitly allows users to shorten URLs using http://bit.ly.
 The module also allows the user to retrieve meta data about the URL
 such as geographic and click information.
 
-WWW::Shorten::Bitly requires the use of a bit.ly user name and API Key.
+WWW::Shorten::Bitly requires WWW::Shorten to be installed in order to
+enable the use of a bit.ly user name and API Key.
 
 INSTALLATION
 

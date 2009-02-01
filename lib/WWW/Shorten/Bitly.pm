@@ -1,7 +1,7 @@
-# $Id: Bitly.pm 78 2009-01-25 14:48:37Z pankaj $
+# $Id: Bitly.pm 93 2009-02-01 10:21:02Z pankaj $
 # $Author: pankaj $
-# $Date: 2009-01-25 20:18:37 +0530 (Sun, 25 Jan 2009) $
-# Author: <a href=mailto:perl@teknatus.com>Pankaj Jain</a>
+# $Date: 2009-02-01 15:51:02 +0530 (Sun, 01 Feb 2009) $
+# Author: <a href=mailto:pjain@cpan.org>Pankaj Jain</a>
 ################################################################################################################################
 package WWW::Shorten::Bitly;
 
@@ -26,16 +26,16 @@ use vars qw( @ISA @EXPORT );
 
 =head1 NAME
 
-WWW::Shorten::Bitly - Interface to shortening URLs using L<http:://bit.ly>
+WWW::Shorten::Bitly - Interface to shortening URLs using L<http://bit.ly>
 
 =head1 VERSION
 
-$Revision: 78 $
+$Revision: 93 $
 
 =cut
 
 BEGIN {
-    our $VERSION = do { my @r = (0,q$Revision: 78 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
+    our $VERSION = do { my @r = (0,q$Revision: 93 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
     $WWW::Shorten::Bitly::VERBOSITY = 2;
 }
 
@@ -285,7 +285,7 @@ sub version {
 
 =head1 AUTHOR
 
-Pankaj Jain, C<< <perl at teknatus.com> >>
+Pankaj Jain, C<< <pjain at cpan.org> >>
 
 =head1 BUGS
 
@@ -374,7 +374,7 @@ SUCH DAMAGES.
 
 =head1 SEE ALSO
 
-L<perl>, L<WWW::Shorten>.
+L<perl>, L<WWW::Shorten>, L<http://bit.ly>.
 
 =cut
 
