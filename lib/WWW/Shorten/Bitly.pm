@@ -1,12 +1,13 @@
-# $Id: Bitly.pm 93 2009-02-01 10:21:02Z pankaj $
+# $Id: Bitly.pm 106 2009-03-05 21:06:26Z pankaj $
 # $Author: pankaj $
-# $Date: 2009-02-01 15:51:02 +0530 (Sun, 01 Feb 2009) $
+# $Date: 2009-03-06 02:36:26 +0530 (Fri, 06 Mar 2009) $
 # Author: <a href=mailto:pjain@cpan.org>Pankaj Jain</a>
 ################################################################################################################################
 package WWW::Shorten::Bitly;
 
 use warnings;
 use strict;
+use Carp;
 
 use base qw( WWW::Shorten::generic Exporter );
 
@@ -30,12 +31,12 @@ WWW::Shorten::Bitly - Interface to shortening URLs using L<http://bit.ly>
 
 =head1 VERSION
 
-$Revision: 93 $
+$Revision: 106 $
 
 =cut
 
 BEGIN {
-    our $VERSION = do { my @r = (0,q$Revision: 93 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
+    our $VERSION = do { my @r = (0,q$Revision: 106 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
     $WWW::Shorten::Bitly::VERBOSITY = 2;
 }
 
@@ -259,6 +260,24 @@ Get click thru information for a shortened bit.ly URL.  By default, the method w
 sub clicks {
     my $self = shift;
     my $base = "http://api.bit.ly/stats?format=xml&version=2.0.1&shortUrl=" . $self->{bitlyurl} . "&login=" . $self->{USER} . "&apiKey=" . $self->{APIKEY};
+    $self->{response} = $self->{browser}->get($base);
+    $self->{$self->{bitlyurl}}->{content} = $self->{xml}->XMLin($self->{response}->{_content});
+    $self->{$self->{bitlyurl}}->{errorCode} = $self->{$self->{bitlyurl}}->{content}->{errorCode};
+    if ($self->{$self->{bitlyurl}}->{errorCode} == 0 ) {
+        $self->{$self->{bitlyurl}}->{clicks} = $self->{$self->{bitlyurl}}->{content}->{results};
+        return $self->{$self->{bitlyurl}}->{clicks};
+    } else {
+        return;
+    }
+}
+
+=head2 errors
+
+=cut
+
+sub errors {
+    my $self = shift;
+    my $base = "http://api.bit.ly/errors?version=2.0.1&login=" . $self->{USER} . "&apiKey=" . $self->{APIKEY};
     $self->{response} = $self->{browser}->get($base);
     $self->{$self->{bitlyurl}}->{content} = $self->{xml}->XMLin($self->{response}->{_content});
     $self->{$self->{bitlyurl}}->{errorCode} = $self->{$self->{bitlyurl}}->{content}->{errorCode};
