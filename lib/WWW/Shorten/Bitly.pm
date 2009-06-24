@@ -1,6 +1,6 @@
-# $Id: Bitly.pm 106 2009-03-05 21:06:26Z pankaj $
+# $Id: Bitly.pm 110 2009-03-22 21:04:27Z pankaj $
 # $Author: pankaj $
-# $Date: 2009-03-06 02:36:26 +0530 (Fri, 06 Mar 2009) $
+# $Date: 2009-03-23 02:34:27 +0530 (Mon, 23 Mar 2009) $
 # Author: <a href=mailto:pjain@cpan.org>Pankaj Jain</a>
 ################################################################################################################################
 package WWW::Shorten::Bitly;
@@ -31,12 +31,12 @@ WWW::Shorten::Bitly - Interface to shortening URLs using L<http://bit.ly>
 
 =head1 VERSION
 
-$Revision: 106 $
+$Revision: 110 $
 
 =cut
 
 BEGIN {
-    our $VERSION = do { my @r = (q$Revision: 1.06 $ =~ /\d+/g); sprintf "%1d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
+    our $VERSION = do { my @r = (q$Revision: 1.10 $ =~ /\d+/g); sprintf "%1d."."%02d" x $#r, @r }; # must be all one line, for MakeMaker
     $WWW::Shorten::Bitly::VERBOSITY = 2;
 }
 
@@ -135,6 +135,7 @@ sub makeashorterlink #($;%)
     $bitly->{xml}   = new XML::Simple(SuppressEmpty => 1);
     my $biturl = "http://api.bit.ly/shorten?history=1&version=2.0.1&longUrl=" . $url . "&login=" . $user . "&apiKey=" . $apikey;
     $bitly->{response} = $ua->get($biturl);
+    $bitly->{response}->is_success || die 'Failed to get bit.ly link: ' . $bitly->{response}->status_line;
     $bitly->{bitlyurl} = $bitly->{json}->jsonToObj($bitly->{response}->{_content})->{results}->{$url}->{shortUrl};
     return unless $bitly->{response}->is_success;
     return $bitly->{bitlyurl};
@@ -162,6 +163,7 @@ sub makealongerlink #($,%)
     $bitly->{xml}   = new XML::Simple(SuppressEmpty => 1);
     my $biturl = URI->new('http://api.bit.ly/expand?version=2.0.1&shortUrl=' . $url . '&login=' . $user . '&apiKey=' . $apikey);
     $bitly->{response} = $ua->get($biturl);
+    $bitly->{response}->is_success || die 'Failed to get long bit.ly link: ' . $bitly->{response}->status_line;
     $bitly->{longurl} = $bitly->{json}->jsonToObj($bitly->{response}->{_content})->{results}->{$foo[3]}->{longUrl};
     return undef unless $bitly->{response}->is_success;
     my $content = $bitly->{response}->content;
