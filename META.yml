@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               WWW-Shorten-Bitly
-version:            1.12
+version:            1.13
 abstract:           Interface to shortening URLs using L<http://bit.ly>
 author:
     - Pankaj Jain <pjain@cpan.org>
